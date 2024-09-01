@@ -1,18 +1,21 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.14)
+project(distributed_kv_store_lib CXX)
 
-# Project Name and Version
-project(DistributedKVStore VERSION 1.0)
-
-# Specify C++ Standard
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-# Add include directory
 include_directories(${PROJECT_SOURCE_DIR}/include)
 
-# Add subdirectories for source and test files
 add_subdirectory(src)
-add_subdirectory(test)
 
-# Output directory for build files
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bin)
+enable_testing()
+include(FetchContent)
+FetchContent_Declare(
+    googletest
+    GIT_REPOSITORY https://github.com/google/googletest.git
+    GIT_TAG        main
+)
+FetchContent_MakeAvailable(googletest)
+    
+add_subdirectory(test)
+target_link_libraries(distributed_kv_store_tests PRIVATE gtest gtest_main)
