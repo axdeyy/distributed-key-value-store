@@ -1,11 +1,11 @@
-# Enable testing
-enable_testing()
+file(GLOB_RECURSE distributed_kv_store_tests_SRC
+    "*.cpp"
+)
 
-# Add the executable for testing
-add_executable(kvstore_test test.cpp)
+add_executable(distributed_kv_store_tests
+    ${distributed_kv_store_tests_SRC}
+)
 
-# Link any necessary libraries for testing
-# e.g., target_link_libraries(kvstore_test some_test_lib)
+target_link_libraries(distributed_kv_store_tests PRIVATE distributed_kv_store_lib)
 
-# Define a test using CTest
-add_test(NAME KVStoreTest COMMAND kvstore_test)
+add_test(NAME distributed_kv_store_tests COMMAND distributed_kv_store_tests)
