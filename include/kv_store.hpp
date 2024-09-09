@@ -1,13 +1,13 @@
 #include <vector>
 
 /**
- * @class CustomHashMap
+ * @class KVStore
  * @brief A custom hash map implementation using linear probing for collision resolution
  * 
  * We are using a template class to create a type-agnostic generic implementation to store key-value pairs
  */
 template <typename KeyType, typename ValueType>
-class CustomHashMap {
+class KVStore {
 private:
     /**
      * @struct HashEntry
@@ -29,10 +29,10 @@ private:
 
 public:
     /**
-     * @brief Constructs a CustomHashMap with a given capacity
+     * @brief Constructs a KVStore with a given capacity
      * @param capacity Initiail capacity of the hashmap. Defaults to 128
     */
-    CustomHashMap(size_t capacity = 128) : capacity_(capacity), size_(0) {
+    KVStore(size_t capacity = 128) : capacity_(capacity), size_(0) {
         table_.resize(capacity_);
     }
 
