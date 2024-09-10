@@ -4,7 +4,7 @@ A custom distributed key-value store written in C++ from scratch.
 ## Roadmap
 
 - [ ] Key-value store.
-  - [ ] CRUD.
+  - [x] CRUD.
   - [ ] Basic persistence (write-ahead log).
 - [ ] RPC network layer.
 - [ ] Leader-follower system.
