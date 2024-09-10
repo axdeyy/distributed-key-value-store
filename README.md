@@ -18,3 +18,11 @@ A custom distributed key-value store written in C++ from scratch.
 **Optional:**
 - [ ] In-memory caching layer.
       
+## License
+
+This project is licensed under the MIT License – see the [LICENSE]([https://github.com/vkayy/vkdb/blob/main/LICENSE](https://github.com/axdeyy/distributed-key-value-store/blob/main/LICENSE
+)) file for details.
+
+## Authors
+
+Vinz Kakilala: [GitHub](https://github.com/axdeyy) - [LinkedIn](https://linkedin.com/in/aalaapdey)
