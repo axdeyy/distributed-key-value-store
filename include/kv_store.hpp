@@ -1,3 +1,11 @@
+/**
+ * @file kv_store.hpp
+ * @brief Header file for the key-value store template
+ */
+
+#ifndef KV_STORE_HPP
+#define KV_STORE_HPP
+
 #include <vector>
 
 /**
@@ -6,7 +14,7 @@
  * 
  * We are using a template class to create a type-agnostic generic implementation to store key-value pairs
  */
-template <typename KeyType, typename ValueType>
+template<typename KeyType, typename ValueType>
 class KVStore {
 private:
     /**
@@ -19,9 +27,11 @@ private:
         bool occupied = false;
     };
 
-    size_t hash(const KeyType& key) const {
-        return std::hash<KeyType>{}(key) % capacity_;  // Calls the instantiated hash function object with given key as argument
-    }
+    /**
+     * @brief Our custom hash function
+     * @param key The key to be hashed
+    */
+    size_t hash(const KeyType& key) const;
 
     std::vector<HashEntry> table_; // Underlying storage "table" for hash map 
     size_t capacity_;              // Current capacity of the hash map
@@ -32,23 +42,14 @@ public:
      * @brief Constructs a KVStore with a given capacity
      * @param capacity Initiail capacity of the hashmap. Defaults to 128
     */
-    KVStore(size_t capacity = 128) : capacity_(capacity), size_(0) {
-        table_.resize(capacity_);
-    }
+    KVStore(size_t capacity = 128);
 
     /**
      * @brief Inserts a key-value pair into the hash map.
      * @param key The key to be inserted.
      * @param value The value associated with the key.
      */
-    void put(const KeyType& key, const ValueType& value) {
-        size_t index = hash(key);
-        while (table_[index].occupied && table_[index].key != key) {
-            index = (index + 1) % capacity_;
-        }
-        table_[index] = {key, value, true};
-        size_++;
-    }
+    void put(const KeyType& key, const ValueType& value);
 
     /**
      * @brief Retrieves the value associated with a key.
@@ -56,27 +57,15 @@ public:
      * @return The value associated with the key.
      * @throw std::runtime_error if the key is not found in the hash map.
      */
-    ValueType get(const KeyType& key) {
-        size_t index = hash(key);
-        while (table_[index].occupied) {
-            if (table_[index].key == key) return table_[index].value;
-            index = (index + 1) % capacity_;
-        }
-        throw std::runtime_error("Key not found");
-    }
+    ValueType get(const KeyType& key);
 
     /**
      * @brief Removes a key-value pair from the hash map.
      * @param key The key to be removed.
      */
-    void del(const KeyType& key) {
-        size_t index = hash(key);
-        while (table_[index].occupied) {
-            if (table_[index].key  == key) {
-                table_[index].occupied = false;
-                return;
-            }
-            index = (index + 1) % capacity_;
-        }
-    }
+    void del(const KeyType& key);
 };
+
+#include "kv_store.tpp"
+
+#endif // KV_STORE_HPP
