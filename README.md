@@ -15,6 +15,6 @@ A custom distributed key-value store written in C++ from scratch.
   - [ ] Sharding.
   - [ ] Advanced persistence (optimised WAL + SSTables)
 
-  **Optional:**
+**Optional:**
 - [ ] In-memory caching layer.
       
